@@ -1,0 +1,40 @@
+\subsection{14.09.18}
+\subsubsection{Математическая индукция}
+Пусть $\Sigma \subseteq \mathbb{N}, 1 \in \Sigma$ (база индукции). Известно, что $1:n \subseteq \Sigma \Rightarrow n + 1 \in \Sigma$. Докажем, что из этого следует, что $\Sigma = \mathbb{N}$ и обратно.\\
+Предположим обратное. Тогда найдем минимальное $k \in \mathbb{N}, k \not\in \Sigma$. По определению $\Sigma$, $k \not= 1$. $1:n - 1 \subseteq \Sigma$, а значит, $n \in \Sigma$. Мы получили противоречие, значит, предположение было неверно, значит, $\Sigma = \mathbb{N}$.\\
+В обратную сторону доказывается очевидно, ведь если $\Sigma = \mathbb{N}$, то $\forall n \in \mathbb{N} \; n + 1 \in \Sigma$.\\
+Замечание: в некоторых случаях удобнее переопределять индукцию так, чтобы базой была не единица, а ноль. Тогда вместо $\mathbb{N}$ будет $\mathbb{N}_0$.
+\subsubsection{Мощность $2^A$}
+Докажем, что $\forall A \; |A| \in \mathbb{N}_0 , \; |2^A| = 2^{|A|}$. Определим $\Sigma = \{n \in \mathbb{N}_0 : \forall A \; |A| = n , \; |2^A| = 2^{|A|}\}$\\
+$0 \in \Sigma$, так как $|\varnothing| = 0, 2^{\varnothing} = \{\varnothing\}, |2^{\varnothing}| = 1 = 2^0 = 2^{|\varnothing|}$ \\
+Предположим, что $n \in \mathbb{N}_0 \; \forall A \; |A| \in 0:n , \; |2^A| = 2^{|A|}$. Тогда $\forall X \;  |X| = n + 1 , \; |X| \geq 1 \Rightarrow \forall x \in X \; |X \setminus \{x\}| = n$. \\
+Тогда можно представить $2^X$ как дизъюнктное объединение множества всех подмножеств X, не содержащих x и множества всех подмножеств X содержащих x. Тогда $|2^X| = |2^{X \setminus \{x\}}| + |2^{\{Y \cup \{x\} : Y \in 2^{X \setminus \{x\}}\}}|$. \\
+$|2^{X \setminus \{x\}}| = 2^n$, так как $|X \setminus \{x\}| = n$ \\
+$|\{Y \cup \{x\} : Y \in 2^{X \setminus \{x\}}\}| = n \Rightarrow |2^{\{Y \cup \{x\} : Y \in 2^{X \setminus \{x\}}\}}| = 2^n$ \\
+$|2^X| = 2^n + 2^n = 2^{n + 1}$
+\subsubsection{Упорядоченная пара}
+A, B - произвольные множества, $a \in A, b \in B$. $(a, b)$ - упорядоченная пара. $(a_1, b_1) = (a_2, b_2) \Leftrightarrow a1 = a2, b1 = b2$
+\subsubsection{n-арный упорядоченный кортеж}
+$A_1, \; ... \; A_n$, $B_1, \; ... \; B_m$.\\
+$(a_1, \; ... \; a_n)$ - n-арный упорядоченный кортеж.\\
+$(a_1, \; ... \; a_n) = (b_1, \; ... \; b_n) \Leftrightarrow m = n, \forall i \in 1:n \; a_i = b_i$ 
+\subsubsection{Прямое (Декартово) произведение}
+Прямым произведением множеств A и B называют $A \times B = \{(a, b) : a \in A, b \in B\}$
+\subsubsection{Бинарное отношение}
+Бинарным отношением R на множествах A и B называют $R \subseteq A \times B$
+\subsubsection{Обратное бинарное отношение}
+Говорят, что $R^{-1}$ - отношение обратное R, если $\forall (a, b) \in R \; (b, a) \in R^{-1}$, и наоборот, отношение, удовлетворяющее данному условию является обратным к R.
+\subsubsection{Отображение}
+Бинарное отношение R на множествах A и B называется отображением, если $\forall a \in A \; \exists ! b \in B \;(a, b) \in R$
+\subsubsection{Сюръекция}
+Отображение R называется сюръективным, если $\forall b \in B \; \exists a \in A \;(a, b) \in R$
+\subsubsection{Инъекция}
+Отображение R называется инъективным, если $(a_1, b) \in R, (a_2, b) \in R \Rightarrow a_1 = a_2$
+\subsubsection{Биекция}
+Отображение R называется биективным, если оно одновременно сюръективно и инъективно
+\paragraph{Пример:}
+$\;$ \\ $\{(\{a, \{a, b\}\}, (a, b)) : a \in A, b \in B\}$ - биекция.
+\subsubsection{n-арное отношение}
+$R \subseteq A_1 \times \; ... \; \times A_n$ - n-арное отношение на множествах $A_1, \; ... \;, A_n$.
+\subsubsection{Унарное отношение}
+$R \subseteq A$ - унарное отношение на множестве A
