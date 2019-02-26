@@ -8,9 +8,9 @@
 Докажем, что $\forall A \; |A| \in \mathbb{N}_0 , \; |2^A| = 2^{|A|}$. Определим $\Sigma = \{n \in \mathbb{N}_0 : \forall A \; |A| = n , \; |2^A| = 2^{|A|}\}$\\
 $0 \in \Sigma$, так как $|\varnothing| = 0, 2^{\varnothing} = \{\varnothing\}, |2^{\varnothing}| = 1 = 2^0 = 2^{|\varnothing|}$ \\
 Предположим, что $n \in \mathbb{N}_0 \; \forall A \; |A| \in 0:n , \; |2^A| = 2^{|A|}$. Тогда $\forall X \;  |X| = n + 1 , \; |X| \geq 1 \Rightarrow \forall x \in X \; |X \setminus \{x\}| = n$. \\
-Тогда можно представить $2^X$ как дизъюнктное объединение множества всех подмножеств X, не содержащих x и множества всех подмножеств X содержащих x. Тогда $|2^X| = |2^{X \setminus \{x\}}| + |2^{\{Y \cup \{x\} : Y \in 2^{X \setminus \{x\}}\}}|$. \\
+Тогда можно представить $2^X$ как дизъюнктное объединение множества всех подмножеств X, не содержащих x и множества всех подмножеств X содержащих x. Тогда $|2^X| = |2^{X \setminus \{x\}}| + |{\{Y \cup \{x\} : Y \in 2^{X \setminus \{x\}}\}}|$. \\
 $|2^{X \setminus \{x\}}| = 2^n$, так как $|X \setminus \{x\}| = n$ \\
-$|\{Y \cup \{x\} : Y \in 2^{X \setminus \{x\}}\}| = n \Rightarrow |2^{\{Y \cup \{x\} : Y \in 2^{X \setminus \{x\}}\}}| = 2^n$ \\
+$|\{Y \cup \{x\} : Y \in 2^{X \setminus \{x\}}\}| = 2^n$ \\
 $|2^X| = 2^n + 2^n = 2^{n + 1}$
 \subsubsection{Упорядоченная пара}
 A, B - произвольные множества, $a \in A, b \in B$. $(a, b)$ - упорядоченная пара. $(a_1, b_1) = (a_2, b_2) \Leftrightarrow a1 = a2, b1 = b2$
