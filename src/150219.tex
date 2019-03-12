@@ -13,12 +13,70 @@
 Обозначим $f(x) = -x * \log x$. На отрезке $[0, 1]$ $f(x)$ строго вогнутая, а значит, по неравенству Йенсена,\\
 $\sum\limits_{i = 1}^n \lambda_i * f(x_i) \leq f(\sum\limits_{i = 1}^n \lambda_i * x_i$, \\
 Причем равенство достигается тогда и только тогда, когда $x_1 = \; ... \; = x_n$.\\
-Тогда если взять $x_i = Pr(A_i)$ и $\lambda_i = \frac{1}{k}$ $\forall i \in 1..n$, получаем:\\
-$\sum\limits_{i = 1}^n \frac{1}{k}(-Pr(A_i) * \log Pr(A_i)) \leq -\sum\limits_{i = 1}^n \frac{1}{k}Pr(A_i) * \log (\sum\limits_{i = 1}^n \frac{1}{k}Pr(A_i))$\\
-$-\frac{1}{k} \sum\limits_{i = 1}^n Pr(A_i) * \log Pr(A_i) \leq -\frac{1}{k} \log\frac{1}{k}$\\
-$-\sum\limits_{i = 1}^n Pr(A_i) * \log Pr(A_i) \leq \log k$\\
+Тогда если взять $x_i = Pr(A_i)$ и $\lambda_i = \frac{1}{k}$ $\forall i \in 1..k$, получаем:\\
+$\sum\limits_{i = 1}^k \frac{1}{k}(-Pr(A_i) * \log Pr(A_i)) \leq -\sum\limits_{i = 1}^k \frac{1}{k}Pr(A_i) * \log (\sum\limits_{i = 1}^k \frac{1}{k}Pr(A_i))$\\
+$-\frac{1}{k} \sum\limits_{i = 1}^k Pr(A_i) * \log Pr(A_i) \leq -\frac{1}{k} \log\frac{1}{k}$\\
+$-\sum\limits_{i = 1}^k Pr(A_i) * \log Pr(A_i) \leq \log k$\\
 \item Из предыдущего пункта и условия равенства для неравенства Йенсена следует, что максимально возможную энтропию для КСС с k исходами, равную $\log k$, имеет схема с k равновероятными исходами.\\
 \item $H(\alpha) = 0 \Leftrightarrow \exists!$ достоверный исход в $\alpha$. \\
 Доказательство в обе стороны очевидно. Если в сумме, составляющей энтропию, есть хоть одно ненулевое слагаемое, то и энтропия ненулевая, а $x \log x = 0$ только при $x = 0$ и $x = 1$.
 \end{itemize}
 \subsubsection{Энтропия пересечения и условная энтропия}
+Пусть есть две КСС - $\alpha$ с исходами $A_1, \; ... \; , A_k$ и $\beta$ с исходами $B_1, \; ... \; , B_l$. Их пересечением $\alpha \cap \beta$ называют схему, исходы которой - $A_i \cap B_j$ $\forall i \in 1..k, \forall j \in 1..l$.\\
+Тогда $H(\alpha \cap \beta) = -\sum\limits_{i = 1}^k \sum\limits_{j = 1}^l Pr(A_i \cap B_j) * \log Pr(A_i \cap B_j)$\\
+Воспользовавшись тем, что $Pr(A_i \cap B_j) = Pr(A_i) * Pr(B_j | A_i)$, получаем\\
+$H(\alpha \cap \beta) = -\sum\limits_{i = 1}^k \sum\limits_{j = 1}^l Pr(A_i) * Pr(B_j | A_i) * (\log Pr(A_i) + \log Pr(B_j | A_i)) =$ \\ 
+$ = -\sum\limits_{i = 1}^k \sum\limits_{j = 1}^l Pr(A_i) * Pr(B_j | A_i) * \log Pr(A_i) - \sum\limits_{i = 1}^k \sum\limits_{j = 1}^l Pr(A_i) * Pr(B_j | A_i) * \log Pr(B_j | A_i) = $\\
+$ = -\sum\limits_{i = 1}^k Pr(A_i) * \log Pr(A_i) * \sum\limits_{j = 1}^l Pr(B_j | A_i) + \sum\limits_{i = 1}^k  Pr(A_i) * (-\sum\limits_{j = 1}^l Pr(B_j | A_i) * \log Pr(B_j | A_i)) = $\\
+$ = -\sum\limits_{i = 1}^k Pr(A_i) * \log Pr(A_i) + \sum\limits_{i = 1}^k  Pr(A_i) * (-\sum\limits_{j = 1}^l Pr(B_j | A_i) * \log Pr(B_j | A_i)) = $\\
+$ = H(\alpha) + \sum\limits_{i = 1}^k  Pr(A_i) * (-\sum\limits_{j = 1}^l Pr(B_j | A_i) * \log Pr(B_j | A_i))$.\\
+$H(\beta | A_i) = -\sum\limits_{j = 1}^l Pr(B_j | A_i) * \log Pr(B_j | A_i)$ называют условной энтропией $\beta$ при условии $A_i$.\\
+$H_{\alpha}(\beta) = \sum\limits_{i = 1}^k  Pr(A_i) * H(\beta | A_i)$ называют (средней) условной энтропией $\beta$ при условии $\alpha$.\\
+Таким образом, в итоге формулу можно записать как \\
+$H(\alpha \cap \beta) = H(\alpha) + H_{\alpha}(\beta)$.\\
+Докажем, что  $0 \leq H_{\alpha}(\beta) \leq H(\beta)$:\\
+Левая часть очевидна из тех же соображений, из которых следует неотрицательность энтропии.\\
+чтобы доказать правую, напишем для зафиксированного j, функции $f(x) = -x * \log x$, $\lambda_i = Pr(A_i)$, $x_i = Pr(B_j | A_i)$ $\forall i \in 1..k$ неравенство Йенсена:\\
+$\sum\limits_{i = 1}^k Pr(A_i) * (- Pr(B_j | A_i) * \log Pr(B_j | A_i)) \leq -(\sum\limits_{i = 1}^k Pr(A_i) * Pr(B_j | A_i)) * \log \sum\limits_{i = 1}^k Pr(A_i) * Pr(B_j | A_i)$\\
+Преобразуем правую часть:\\
+$-(\sum\limits_{i = 1}^k Pr(A_i) * Pr(B_j | A_i)) * \log \sum\limits_{i = 1}^k Pr(A_i) * Pr(B_j | A_i) = -(\sum\limits_{i = 1}^k Pr(B_j \cap A_i)) * \log \sum\limits_{i = 1}^k Pr(B_j \cap A_i) = -Pr(B_j) * \log Pr(B_j)$\\
+После чего просуммируем обе части неравенства по j:\\
+$\sum_{j = 1}^l \sum\limits_{i = 1}^k Pr(A_i) * (- Pr(B_j | A_i) * \log Pr(B_j | A_i)) \leq \sum_{j = 1}^l (-Pr(B_j) * \log Pr(B_j))$\\
+$\sum\limits_{i = 1}^k Pr(A_i) * \sum_{j = 1}^l (- Pr(B_j | A_i) * \log Pr(B_j | A_i)) \leq -\sum_{j = 1}^l Pr(B_j) * \log Pr(B_j)$\\
+$\sum\limits_{i = 1}^k Pr(A_i) * H(\beta | A_i) \leq H(\beta)$\\
+$H_{\alpha}(\beta) \leq H(\beta)$.\\
+Из условия равенства для неравенства Йенсена следует, что $H_{\alpha}(\beta) = H(\beta) \Leftrightarrow$ все $Pr(B_j | A_i)$ равны между собой.\\
+По формуле полной вероятности,\\
+$\forall j \in 1..l \; Pr(B_j) = \sum\limits_{i = 1}^k Pr(B_j | A_i) * Pr(A_i)$\\
+Используя равенство всех $Pr(B_j | A_i)$ пишем:\\
+$\forall j \in 1..l \; Pr(B_j) = Pr(B_j | A_1) * \sum\limits_{i = 1}^k Pr(A_i)$\\
+$\forall j \in 1..l \; Pr(B_j) = Pr(B_j | A_1)$\\
+То есть, $\forall i \in 1..k, \forall j \in 1..l \; Pr(B_j) = Pr(B_j | A_i)$
+Вспомним теперь определение взаимно независимых событий:\\
+A и B независимы $\Leftrightarrow Pr(A \cap B) = Pr(A) * Pr(B) \Leftrightarrow Pr(A) * Pr(B | A) = Pr(A) * Pr(B) \Leftrightarrow Pr(B | A) = Pr(B)$.\\
+КСС $\alpha$ и $\beta$ называются независимыми, когда все исходы $\alpha$ независимы со всеми исходами $\beta$.\\
+В таком случае, $H_{\alpha}(\beta)$ максимальна и равна $H(\beta)$.
+\subsubsection{Количество информации}
+Величина $I(\alpha, \beta) = H(\beta) - H_{\alpha}(\beta)$ называется количеством информации.\\
+Запишем несколько свойств количества информации, которые доказываются простой проверкой:\\
+\begin{itemize}
+\item $I(\alpha, \beta) \geq 0$\\
+\item $I(\alpha, \beta) = H(\beta) \Leftrightarrow H_{\alpha}(\beta) = 0$\\
+\item $I(\alpha, \beta) = I(\beta, \alpha)$\\
+\item $I(\alpha, \beta) = 0 \Leftrightarrow$ $\alpha$ и $\beta$ независимы.
+\end{itemize}
+Пример:\\
+Загадано натуральное число $x \in 1..N$\\
+$\beta$ - опыт, состоящий в нахождении x, $\beta_m$ - опыт, показывающий, делится ли x на m, $m \in 1..N$.\\
+У $\beta$ N исходов, у $\beta_m$ два исхода.\\
+$H_{\beta_m}(\beta) = Pr{x \vdots m} * H(\beta | "x \vdots m") + Pr{x \not\vdots m} * H(\beta | "x \not\vdots m")$\\
+Если обозначить количество чисел от 1 до N, которые делятся на m, как $q = \lfloor \frac{N}{m} \rfloor$, то мы получим:\\
+$Pr{x \vdots m} = \frac{q}{N}$\\
+$Pr{x \not\vdots m} = \frac{N - q}{N}$\\
+$H(\beta | "x \vdots m") = -\sum\limits_{i \vdots m, i \in 1..N} \frac{1}{q} * \log \frac{1}{q} = -\frac{q}{q} * \log \frac{1}{q} = \log q$\\
+Аналогично $H(\beta | "x \not\vdots m") = \log (N - q)$\\
+Таким образом, $H_{\beta_m}(\beta) = \frac{q}{N} * \log q + \frac{N - q}{N} * \log (N - q)$\\
+$I(\beta_m, \beta) = \log N - \frac{q}{N} * \log q - \frac{N - q}{N} * \log (N - q) = $\\
+$ = \frac{q}{N} * \log N - \frac{q}{N} * \log q + \frac{N - q}{N} * \log N - \frac{N - q}{N} * \log (N - q) = $\\
+$ = -\frac{q}{N} * \log \frac{q}{N} - \frac{N - q}{N} * \log \frac{N - q}{N} \leq \log 2$\\
+Равенство достигается при $q = N - q = \frac{N}{2}$, то есть если N четно и $m = 2$.
