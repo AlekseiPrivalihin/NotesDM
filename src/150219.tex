@@ -11,7 +11,7 @@
 \item Для любой КСС $\alpha$, у которой k исходов, $H(\alpha) \leq \log k$\\
 Доказательство:\\
 Обозначим $f(x) = -x * \log x$. На отрезке $[0, 1]$ $f(x)$ строго вогнутая, а значит, по неравенству Йенсена,\\
-$\sum\limits_{i = 1}^n \lambda_i * f(x_i) \leq f(\sum\limits_{i = 1}^n \lambda_i * x_i$, \\
+$\sum\limits_{i = 1}^n \lambda_i * f(x_i) \leq f(\sum\limits_{i = 1}^n \lambda_i * x_i)$, \\
 Причем равенство достигается тогда и только тогда, когда $x_1 = \; ... \; = x_n$.\\
 Тогда если взять $x_i = Pr(A_i)$ и $\lambda_i = \frac{1}{k}$ $\forall i \in 1..k$, получаем:\\
 $\sum\limits_{i = 1}^k \frac{1}{k}(-Pr(A_i) * \log Pr(A_i)) \leq -\sum\limits_{i = 1}^k \frac{1}{k}Pr(A_i) * \log (\sum\limits_{i = 1}^k \frac{1}{k}Pr(A_i))$\\
@@ -41,8 +41,8 @@ $\sum\limits_{i = 1}^k Pr(A_i) * (- Pr(B_j | A_i) * \log Pr(B_j | A_i)) \leq -(\
 Преобразуем правую часть:\\
 $-(\sum\limits_{i = 1}^k Pr(A_i) * Pr(B_j | A_i)) * \log \sum\limits_{i = 1}^k Pr(A_i) * Pr(B_j | A_i) = -(\sum\limits_{i = 1}^k Pr(B_j \cap A_i)) * \log \sum\limits_{i = 1}^k Pr(B_j \cap A_i) = -Pr(B_j) * \log Pr(B_j)$\\
 После чего просуммируем обе части неравенства по j:\\
-$\sum_{j = 1}^l \sum\limits_{i = 1}^k Pr(A_i) * (- Pr(B_j | A_i) * \log Pr(B_j | A_i)) \leq \sum_{j = 1}^l (-Pr(B_j) * \log Pr(B_j))$\\
-$\sum\limits_{i = 1}^k Pr(A_i) * \sum_{j = 1}^l (- Pr(B_j | A_i) * \log Pr(B_j | A_i)) \leq -\sum_{j = 1}^l Pr(B_j) * \log Pr(B_j)$\\
+$\sum\limits_{j = 1}^l \sum\limits_{i = 1}^k Pr(A_i) * (- Pr(B_j | A_i) * \log Pr(B_j | A_i)) \leq \sum\limits_{j = 1}^l (-Pr(B_j) * \log Pr(B_j))$\\
+$\sum\limits_{i = 1}^k Pr(A_i) * \sum\limits_{j = 1}^l (- Pr(B_j | A_i) * \log Pr(B_j | A_i)) \leq -\sum\limits_{j = 1}^l Pr(B_j) * \log Pr(B_j)$\\
 $\sum\limits_{i = 1}^k Pr(A_i) * H(\beta | A_i) \leq H(\beta)$\\
 $H_{\alpha}(\beta) \leq H(\beta)$.\\
 Из условия равенства для неравенства Йенсена следует, что $H_{\alpha}(\beta) = H(\beta) \Leftrightarrow$ все $Pr(B_j | A_i)$ равны между собой.\\
@@ -69,10 +69,10 @@ A и B независимы $\Leftrightarrow Pr(A \cap B) = Pr(A) * Pr(B) \Leftr
 Загадано натуральное число $x \in 1..N$\\
 $\beta$ - опыт, состоящий в нахождении x, $\beta_m$ - опыт, показывающий, делится ли x на m, $m \in 1..N$.\\
 У $\beta$ N исходов, у $\beta_m$ два исхода.\\
-$H_{\beta_m}(\beta) = Pr{x \vdots m} * H(\beta | "x \vdots m") + Pr{x \not\vdots m} * H(\beta | "x \not\vdots m")$\\
+$H_{\beta_m}(\beta) = Pr\{x \vdots m\} * H(\beta | "x \vdots m") + Pr\{x \not\vdots m\} * H(\beta | "x \not\vdots m")$\\
 Если обозначить количество чисел от 1 до N, которые делятся на m, как $q = \lfloor \frac{N}{m} \rfloor$, то мы получим:\\
-$Pr{x \vdots m} = \frac{q}{N}$\\
-$Pr{x \not\vdots m} = \frac{N - q}{N}$\\
+$Pr\{x \vdots m\} = \frac{q}{N}$\\
+$Pr\{x \not\vdots m\} = \frac{N - q}{N}$\\
 $H(\beta | "x \vdots m") = -\sum\limits_{i \vdots m, i \in 1..N} \frac{1}{q} * \log \frac{1}{q} = -\frac{q}{q} * \log \frac{1}{q} = \log q$\\
 Аналогично $H(\beta | "x \not\vdots m") = \log (N - q)$\\
 Таким образом, $H_{\beta_m}(\beta) = \frac{q}{N} * \log q + \frac{N - q}{N} * \log (N - q)$\\
