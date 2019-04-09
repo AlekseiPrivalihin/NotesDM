@@ -1,0 +1,53 @@
+\subsection{01.03.19}
+\subsubsection{Свойства Марковских цепей}
+\begin{itemize}
+\item $Pr\{\xi_{n + 1} = j | \xi_0 = i_0, \; ... \; , \xi_n = i\} = Pr\{\xi_{n + 1} = j | \xi_n = i\}$\\
+Доказательство:\\
+$Pr\{\xi_{n + 1} = j | \xi_n = i\} = \frac{Pr\{\xi_{n + 1} = j, \xi_n = i\}}{Pr\{\xi_n = i\}} = \sum\limits_{(i_0, ..., i_{n-1}) \in M^n} \frac{Pr\{\xi_{n+1} = j, \xi_n = i, \xi_0 = i_0, \; ... \; , \xi_{n - 1} = i_{n - 1}\}}{Pr\{\xi_n = i\}} = \sum\limits_{(i_0, ..., i_{n-1}) \in M^n} \frac{Pr\{\xi_{n + 1} = j, \xi_n = i, \xi_0 = i_0, \; ... \; , \xi_{n - 1} = i_{n - 1}\}}{Pr\{\xi_n = i\}} = \sum\limits_{(i_0, ..., i_{n-1}) \in M^n} \frac{P_{ij}Pr\{\xi_n = i, \xi_0 = i_0, \; ... \; , \xi_{n - 1} = i_{n - 1}\}}{Pr\{\xi_n = i\}} = \frac{P_{ij}}{Pr\{\xi_n = i\}} * \sum\limits_{(i_0, ..., i_{n-1}) \in M^n}Pr\{\xi_n = i, \xi_0 = i_0, \; ... \; , \xi_{n - 1} = i_{n - 1}\} = \frac{P_{ij}}{Pr\{\xi_n = i\}} * Pr\{\xi_n = i\} = P_{ij}$\\
+\item $Pr\{\xi_{n + 1} = j | \xi_k = i_k, \xi_n = i\} = Pr\{\xi_{n + 1} = j | \xi_n = i\}$\\
+(Никакие состояния, кроме предыдущего, не влияют на вероятность перехода).\\
+\item $Pr\{\xi_{n + m} = j | \xi_0 = i_0, \; ... \; , \xi_n = i\} = Pr\{\xi_{n + m} = j | \xi_n = i\}$\\
+Доказательство:\\
+Для $m = 1$ утверждение уже доказано.\\
+Пусть утверждение верно для $m = k$, докажем его для $m = k + 1$:\\
+$Pr\{\xi_{n + k + 1} = j | \xi_0 = i_0, \; ... \; , \xi_n = i\} = \frac{Pr\{\xi_{n + k + 1} = j, \xi_0 = i_0, \; ... \; , \xi_n = i\}}{Pr\{\xi_0 = i_0, \; ... \; , \xi_n = i\}} = \sum\limits_{s \in M} \frac{Pr\{\xi_{n + k + 1} = j, \xi_{n + k} = s, \xi_0 = i_0, \; ... \; , \xi_n = i\}}{Pr\{\xi_0 = i_0, \; ... \; , \xi_n = i\}} = \sum\limits_{s \in M} \frac{P_{sj}Pr\{\xi_{n + k} = s, \xi_0 = i_0, \; ... \; , \xi_n = i\}}{Pr\{\xi_0 = i_0, \; ... \; , \xi_n = i\}} = \sum\limits_{s \in M} P_{sj}Pr\{\xi_{n + k} = s | \xi_0 = i_0, \; ... \; , \xi_n = i\} = \sum\limits_{s \in M} Pr\{\xi_{n + k + 1} = j | \xi_{n + k} = s\}Pr\{\xi_{n + k} = s | \xi_n = i\} = \sum\limits_{s \in M} \frac{Pr\{\xi_{n + k + 1} = j | \xi_{n + k} = s, \xi_{n} = i\}Pr\{\xi_{n + k} = s, \xi_n = i\}}{Pr\{\xi_n = i} = \sum\limits_{s \in M} \frac{Pr\{\xi_{n + k + 1} = j, \xi_{n + k} = s, \xi_n = i\}}{Pr\{\xi_n = i} = \sum\limits_{s \in M} \frac{Pr\{\xi_{n + k} = s | \xi_{n + k + 1} = j, \xi_n = i\}Pr\{\xi_{n + k + 1} = j, \xi_n = i\}}{Pr\{\xi_n = i} = \frac{Pr\{\xi_{n + k + 1} = j, \xi_n = i\}}{Pr\{\xi_n = i} \sum\limits_{s \in M} Pr\{\xi_{n + k} = s | \xi_{n + k + 1} = j, \xi_n = i\} = Pr\{\xi_{n + k + 1} = j | \xi_n = i\} * 1 = Pr\{\xi_{n + k + 1} = j | \xi_n = i\}$\\
+\item Однородность: $Pr\{\xi_{n + 1} = j | \xi_n = i\} = P_{ij} = Pr\{\xi_1 = j | \xi_0 = i\}$\\
+\item $Pr\{\xi_{n + m} = j | \xi_n = i\} = Pr\{\xi_m = j | \xi_0 = i\}$
+\item $\forall n > 0 \; Pr\{\xi_n = i\} = \sum\limits_{s \in M} Pr\{\xi_n = i | \xi_0 = s\}$\\
+\end{itemize}
+\subsubsection{Матрица перехода на n шагов}
+$P = P(1)$ - матрица перехода на 1 шаг.\\
+$P(n): \; P(n)_{ij} = Pr\{\xi_n = j | \xi_0 = i\}$ - матрица перехода на n шагов.\\
+Лемма: произведение двух стохастических (по строкам) матриц - также стохастическая матрица. Доказать самостоятельно (на экзамене не будет).\\
+Свойство: $P(m + n) = P(m)P(n)$ (откуда получаем, что $P(n) = P(1)^n)$.\\
+Доказательство: \\
+$P(m + n)_{ij} = Pr\{\xi_{m + n} = j | \xi_0 = i\} = \sum\limits_{s \in M}Pr\{\xi_{m + n} = j | \xi_m = s\}Pr\{\xi_{m} = s | \xi_0 = i\} = \sum\limits_{s \in M} P(m)_{is}P(n)_{sj}$\\
+\subsubsection{Пример со скрещиванием гибридов.}
+Пусть G и g - две формы одного гена. Любой организм содержит два таких гена - GG, Gg или gg. Каждый потомок получает по одному гену от каждого из родителей равновероятно (то есть, у GG и Gg с вероятностью $\frac{1}{2}$ родится потомок Gg и с вероятностью $\frac{1}{2}$ - GG). Напишем матрицу переходных состояний P при скрещивании с гибридом (Gg):\\
+\begin{table}[H]
+\caption{Матрица переходных состояний.}
+\label{tabular:TransitionStatesMatrix}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$\cdot$ & gg & Gg & GG\\
+\hline
+gg & $\frac{1}{2}$ & $\frac{1}{2}$ & 0\\
+\hline
+Gg & $\frac{1}{4}$ & $\frac{1}{2}$ & $\frac{1}{4}$\\
+\hline
+GG & 0 & $\frac{1}{2}$ & $\frac{1}{2}$\\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+Пусть исходный организм мог с равной вероятностью иметь любой набор генов. Тогда распределение исходного состояния $\mu = (\frac{1}{3}, \frac{1}{3}, \frac{1}{3})$.\\
+$\mu * P = a = (\frac{1}{4}, \frac{1}{2}, \frac{1}{4})$\\
+$\mu * P^2 = a$\\
+Это явление называется стабилизацией Марковского процесса, а распределение a - стационарным распределением.
+\subsubsection{Стабилизация и стационарное распределение}
+Более формально, если существует $\lim\limits_{t \to +\infty} \mu * P^t = \pi$, $\pi$ называют стационарным распределением Марковской цепи.\\
+Заметим, что $\pi = \lim\limits_{t \to +\infty} \mu * P^{t - 1} * P = \pi * P$.\\
+\subsubsection{Эргодические Марковские цепи}
+Если матрица P переходных состояний некой Марковской цепи такова, что $\exists n: \; \forall j \in M \; \exists i \in M: \; P^n_{ij} > 0$, то эта цепь называется эргодической, а P называется эргодической матрицей.\\
+Теорема (без доказательства): Если Марковская цепь эргодическая, то у нее существует единственное стационарное распределение.
