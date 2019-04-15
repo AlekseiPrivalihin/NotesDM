@@ -3,8 +3,11 @@
 \subsubsection{Классификация состояний Марковской цепи}
 Пусть есть Марковская цепь с множеством состояний S и матрицей переходных вероятностей P, $i, j \in S$.
 Говорят, что состояние j достижимо из состояния i ($i \rightarrow j$), если $\exists n \geq 0: \; P^n_{ij} > 0$.\\
-Достижимость рефлексивна: $P^0_{ii} = E_{ii} = 1 > 0$\\
-и транзитивна: $i \rightarrow j, j \rightarrow k \Rightarrow \exists m, n \in N_0: \; P^m_{ij} > 0, P^n_{jk} > 0 \Rightarrow P^{n + m}_{ik} = \sum\limits_{l \in S} P^m_{il}P^n_{lk} \geq P^m_{ij}P^n_{jk} > 0$.\\
+Достижимость: \\
+\begin{itemize}
+\item рефлексивна: $P^0_{ii} = E_{ii} = 1 > 0$\\
+\item транзитивна: $i \rightarrow j, j \rightarrow k \Rightarrow \exists m, n \in N_0: \; P^m_{ij} > 0, P^n_{jk} > 0 \Rightarrow P^{n + m}_{ik} = \sum\limits_{l \in S} P^m_{il}P^n_{lk} \geq P^m_{ij}P^n_{jk} > 0$.\\
+\end{itemize}
 Если $i \rightarrow j$ и $j \rightarrow i$, говорят, что состояния i и j сообщаются ($i \leftrightarrow j$).\\
 Отношение сообщения, очевидно, симметрично, а значит, является отношением эквивалентности.\\
 Значит, S разбивается на непересекающиеся классы сообщающихся вершин - классы эквивалентности по отношению сообщения.
@@ -31,10 +34,10 @@ $d(i) = \gcd(\rho_i)$ называют периодом состояния i.\\
 Доказательство:\\
 Пусть $i, j \in S, i \leftrightarrow j \Rightarrow \exists m, n \in N: \; P^m_{ij} > 0, P^n_{ji} > 0$.\\
 $\forall d$ - делитель $\rho_i$, $\forall k \in \rho_j \; P^k_{jj} > 0$.\\
-$P^{m + k + n}_{ii} \geq P^m_{ij}P^k_{jj}P^n_{ji} > 0 \Rightarrow m + k + n \in \rho_i \Rightarrow m + k + n \vdots d$.\\
-При этом, $P^{m + n}_{ii} \geq P^m_{ij}P^n_{ji} > 0 \Rightarrow m + n \in \rho_i \Rightarrow m + n \vdots d$.\\
-Если $m + n \vdots d$ и $m + n + k \vdots d$, значит, $k \vdots d$, то есть любой элемент $\rho_j$ делит любой делитель $\rho_i$, а значит, $d(j) = \gcd(\rho_j) \vdots \gcd(\rho_i) = d(i)$.\\
-Аналогично, $d(i) \vdots d(j)$, а значит, $d(i) = d(j)$, что и требовалось доказать.\\
+$P^{m + k + n}_{ii} \geq P^m_{ij}P^k_{jj}P^n_{ji} > 0 \Rightarrow (m + k + n) \in \rho_i \Rightarrow (m + k + n) \vdots d$.\\
+При этом, $P^{m + n}_{ii} \geq P^m_{ij}P^n_{ji} > 0 \Rightarrow (m + n) \in \rho_i \Rightarrow (m + n) \vdots d$.\\
+Если $(m + n) \vdots d$ и $(m + n + k) \vdots d$, значит, $k \vdots d$, то есть любой элемент $\rho_j$ делится на любой делитель $\rho_i$, а значит, $d(j) = \gcd(\rho_j) \geq \gcd(\rho_i) = d(i)$.\\
+Аналогично, $d(i) \geq d(j)$, а значит, $d(i) = d(j)$, что и требовалось доказать.\\
 Утверждение (без доказательства):\\
-Если $d(i) < \infty$, $\exists N: \; \forall n \geq N \; P^{n * d(i)}_{ii} > 0$.\\
+Если $d(i) < \infty$, то $\exists N: \; \forall n \geq N \; P^{n * d(i)}_{ii} > 0$.\\
 Частный случай: $d(i) = 1 \Leftrightarrow \exists N: \; \forall n > N \; P^n_{ii} > 0$.
