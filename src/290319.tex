@@ -1,0 +1,50 @@
+\subsection{29.03.19}
+\subsubsection{Алгоритм Прима-Ярника.}
+Прекрасно описан на \href{http://www.e-maxx-ru.1gb.ru/algo/mst_prim}{E-maxx}.
+\subsubsection{Алгоритм Краскала.}
+\href{http://www.e-maxx-ru.1gb.ru/algo/mst_kruskal}{Там же}.
+\subsubsection{Поток.}
+Пусть у нас есть граф G.\\
+$\forall e \in E(G) \; e = xy$ определим $\overrightarrow{e} = (e, x, y), \; \overleftarrow{e} = (e, y, x)$.\\
+$\overrightarrow{E} = \{(e, x, y): \; e = xy; x, y \in V(G); e \in E(G)\}$ - заметим, что сюда входят ребра в обе стороны.\\
+$|\overrightarrow{E}| = 2|E(G)|$.\\
+Для двух подмножеств множества вершин $X, Y \subseteq V(G)$ определим $\overrightarrow{E}(X, Y) = \{(e, x, y): \; x \in X; y \in Y; (e, x, y) \in \overrightarrow{E}\}$.\\
+Для любой функции $f: \; \overrightarrow{E} \rightarrow \mathbb{R}$ определим $\forall X, Y \subseteq V(G) \; f(X, Y) = \sum\limits_{\overrightarrow{e} \in \overrightarrow{E}(X, Y)}f(\overrightarrow{e})$.\\
+Итак, пусть имеется произвольный неорграф G. Выделим в нем две вершины $s, t \in V(G); s \not= t$, s назовем истоком, а t - стоком.\\
+Введем также на этом графе функцию $c: \; \overrightarrow{E} \rightarrow \mathbb{N}_0$ - пропускные способности ребер.\\
+Тогда $(G, s, t, c)$ называют сетью.\\
+Функция $f: \; \overrightarrow{E} \rightarrow \mathbb{R}$ является потоком в сети $(G, s, t, c)$, если:\\
+\begin{itemize}
+\item $\forall e \in E(G) \; f(\overrightarrow{e}) = f(\overleftarrow{e})$ \\
+\item $\forall v \in V(G), v \not= s, v \not= t \; f(\{v\}, V(G)) = 0$ (если немного порисовать, станет понятно, что это условие означает, что для любой вершины сумма входящих потоков равна сумме исходящих, такое себе правило Киргхофа)\\
+\item $\forall \overrightarrow{e} \in \overrightarrow{E} \; f(\overrightarrow{e}) \leq f(\overrightarrow{e})$
+\end{itemize}
+\subsubsection{Разрез.}
+Разрезом в сети $(G, s, t, c)$ называют пару $(S, V(G) \setminus S)$, где $S \subset V(G), s \in S, t \not\in S$.\\
+Утверждение: $\forall S \subset V(G) \; f(S, \overline{S}) = f(\{s\}, V(G))$.\\
+Доказательство: $f(S, \overline{S}) = f(S, V) - f(S, S) = f(\{s\}, V) + f(S \setminus \{s\}, V) - f(S, S)$.\\
+Второе слагаемое обнуляется по второму свойству из определения потока, третье - по третьему (ведь для любого ребра, поток по которому мы будем прибавлять, мы будем прибавлять и поток по обратному ребру).\\
+$f(\{s\}, V) = f(S, \overline{S}) = |f|$ называют величиной потока в сети.\\
+$c(S, \overline{S})$ - пропускная способность разреза.\\
+Лемма: $|f| \leq c(S, \overline{S}) \; \forall f, (S, \overline{S})$.\\
+Доказательство: $|f| = f(S, \overline{S}) = \sum\limits_{\overrightarrow{e} \in\overrightarrow{E}(S, \overline{S})}f(\overrightarrow{e} \leq \sum\limits_{\overrightarrow{e} \in\overrightarrow{E}(S, \overline{S})}c(\overrightarrow{e} = c(S, \overline{S})$.
+\subsubsection{Теорема Форда-Фалкерсона.}
+Теорема: $\max |f| = \min c(S, \overline{S})$.
+Доказательство: "$\leq$" уже доказано в лемме.\\
+$f_0$ - нулевой поток (поток на всех ребрах равен нулю).\\
+$f_n$ - целочисленный поток.\\
+$S_n = \{v \in V(G): \; s = v_0,v_1,...,v_n = v$ - простой путь, причем $(e_i, v_i, v_{i + 1}) = \overrightarrow{e_i} \in \overrightarrow{E}, c(\overrightarrow{e}) - f_n(\overrightarrow{e}) > 0 \}$ - множество вершин, достижимых из s по ребрам с ненулевой остаточной пропускной способностью.\\
+Пусть $t \in S_n$.\\
+$w = \{s = v_0, v_1, ... , v_l = t\}$ - путь по ребрам с ненулевой остаточной пропускной способностью.\\
+$\epsilon = \min\limits_{i \in 0..(n - 1)} (c(\overrightarrow{e_i}) - f_n(\overrightarrow{e_i}))$, где $\overrightarrow{e_i} = (e_i, v_i, v_{i + 1})$.\\
+Определим $f_{n + 1}$:\\
+\begin{itemize}
+\item $f_{n + 1}(\overrightarrow{e}) = f_{n}(\overrightarrow{e}) + \epsilon$, если $\exists j \in 0..(n - 1): \; \overrightarrow{e} = \overrightarrow{e_j}$\\
+\item $f_{n + 1}(\overrightarrow{e}) = f_{n}(\overrightarrow{e}) - \epsilon$, если $\exists j \in 0..(n - 1): \; \overrightarrow{e} = \overleftarrow{e_j}$\\
+\item $f_{n + 1}(\overrightarrow{e}) = f_{n}(\overrightarrow{e})$ иначе
+\end{itemize}
+Прямой проверкой по определению убедимся, что $f_{n + 1}$ является потоком.\\
+$|f_{n + 1}| = |f_n| + \epsilon$, то есть на каждом шаге алгоритма поток увеличивается на положительное целое число, а поскольку поток ограничен сверху пропускной способностью минимального разреза, алгоритм сделает конечное количество шагов.\\
+Если же $t \not\in S_n$, $(S_n, \overline{S_n})$ - разрез, причем $\forall \overrightarrow{e} \in \overrightarrow{E}(S_n, \overline{S_n}) \; f_n(\overrightarrow{e}) = c(\overrightarrow{e}) \Rightarrow c(S_n, \overline{S_n}) = f_n(S_n, \overline{S_n}) = |f_n|$.\\
+Как нам уже известно из леммы, если пропускная способность некоторого разреза равна некоторому потоку, то этот поток является максимальным, а разрез - минимальным.\\
+Таким образом, мы конструктивно доказали равенство величины максимального потока и пропускной способности минимального разреза. Алгоритм, который мы применяли, называется алгоритмом Форда-Фалкерсона.
